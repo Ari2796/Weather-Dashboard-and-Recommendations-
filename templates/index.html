@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Weather App</title>
+    <style>
+        body {
+            background: url('https://img.lovepik.com/background/20211022/large/lovepik-gorgeous-high-tech-picture-background-image_500638596.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Roboto', sans-serif;
+            overflow-y: scroll;
+            height: 100vh;
+        }
+        h1 {
+            color: #ffffff;
+            font-family: 'Pacifico', cursive;
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(24, 177, 200, 0.7);
+        }
+        .city-name {
+            font-size: 3rem;
+            font-style: italic;
+            color: #ffffff;
+            text-align: center;
+            margin-top: 20px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 225, 255, 0.7);
+        }
+        .temp-section, .humidity-section {
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 15px;
+            color: #fff;
+            text-align: center;
+        }
+        .temp-section {
+            background-color: #2c3e50;
+        }
+        .humidity-section {
+            background-color: #34495e;
+        }
+        .recommendations-section {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 15px;
+            background-color: #22cfe6;
+            color: #fff;
+        }
+        .input-group {
+            margin: 0 auto;
+            max-width: 600px;
+        }
+        .btn-primary {
+            background-color: #1abc9c;
+            border: none;
+            font-size: 0.799rem;
+            padding: 10px 20px;
+        }
+        .btn-primary:hover {
+            background-color: #16a085;
+            transform: scale(1.05);
+            transition: transform 0.2s;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+
+        .sub-heading {
+            font-size: 1.5rem;
+            color: #ecf0f1;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .city-name {
+                font-size: 1.5rem;
+            }
+        }
+        
+        .name {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="name">ARIKRISHNAN</div>
+    <div class="container mt-5">
+        <h1 class="text-center">Weather Forecast</h1>
+        <form method="POST" action="/weather" class="mb-4">
+            <div class="input-group">
+                <input type="text" class="form-control" name="location" placeholder="Enter a city name" required>
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        {% if location %}
+            <div class="city-name"><b>{{ location }}</b></div>
+            <div class="temp-section">
+                <h5 class="card-title">Current Temperature</h5>
+                <p class="card-text">{{ current_temp }}°C {{ weather_emoji }}</p>
+            </div>
+            <div class="humidity-section">
+                <h5 class="card-title">Humidity</h5>
+                <p class="card-text">{{ humidity }}%</p>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <p class="card-text">
+                        Pressure: <strong>{{ pressure }} hPa</strong><br>
+                        Visibility: <strong>{{ visibility }} km</strong><br>
+                        Feels Like: <strong>{{ feels_like }}°C</strong><br>
+                        Sunrise: <strong>{{ sunrise }}</strong><br>
+                        Sunset: <strong>{{ sunset }}</strong><br>
+                    </p>
+                </div>
+            </div>
+        {% endif %}
+        {% if weather_recommendations %}
+            <div class="recommendations-section">
+                <h5 class="sub-heading">Weather Recommendations:</h5>
+                <ul>
+                    {% for recommendation in weather_recommendations %}
+                        <li>{{ recommendation }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        {% if forecast_list %}
+        
+        <h4 class="text-center" style="color: #ffffff;margin-top: 30px;margin-bottom: 15px;text-shadow: 2px 2px 4px rgba(24, 177, 200, 0.7);"><b>Forecast Prediction for Upcoming days</b></h4>
+        <div class="row">
+                {% for forecast in forecast_list %}
+                    <div class="col-md-4 mb-3">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ forecast.date }}</h5>
+                                <p class="card-text">{{ forecast.weather_emoji }}<br>{{ forecast.temp }}°C</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

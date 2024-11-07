@@ -1,0 +1,78 @@
+body {
+    background: url('https://t4.ftcdn.net/jpg/06/41/91/85/360_F_641918542_bL3O5qWqKmaVrxM12Qa1pp1owFvKKP3k.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Roboto', sans-serif;
+    overflow-y: scroll; 
+    height: 100vh;
+}
+
+h1 {
+    color: #ffcc00;
+    font-family: 'Pacifico', cursive;
+    font-size: 3rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+}
+
+.city-name {
+    font-size: 2rem;
+    color: #FF5733; 
+    text-align: center; 
+    margin-top: 20px; 
+    text-transform: uppercase;
+}
+
+.temp-section, .humidity-section {
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 15px; 
+    color: #fff; 
+    text-align: center; 
+}
+
+.temp-section {
+    background-color: #FF5733; 
+}
+
+.humidity-section {
+    background-color: #3498db;
+}
+
+.alert {
+    border-radius: 10px;
+    font-size: 1.2rem; 
+}
+
+.input-group {
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.btn-primary {
+    background-color: #FF5733;
+    border: none;
+    font-size: 1.2rem; 
+    padding: 10px 20px; 
+}
+
+.btn-primary:hover {
+    background-color: #C70039; 
+    transform: scale(1.05);
+    transition: transform 0.2s;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+    font-size: 1.2rem;
+    color: #ffffff;
+}
+
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    .city-name {
+        font-size: 1.5rem; 
+    }
+}
