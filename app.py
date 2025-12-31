@@ -6,7 +6,7 @@ from multipledispatch import dispatch
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
-API_KEY = '62b36b1f93292df87383e34ba50282b2'
+API_KEY = '....'
 BASE_URL = 'http://api.openweathermap.org/data/2.5/weather'
 FORECAST_URL = 'http://api.openweathermap.org/data/2.5/forecast'
 
@@ -163,3 +163,4 @@ def process_forecast_data(forecast_data):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
